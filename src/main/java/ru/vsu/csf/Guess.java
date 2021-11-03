@@ -1,6 +1,6 @@
 package ru.vsu.csf;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public enum Guess {
     ODD(1),
@@ -17,7 +17,7 @@ public enum Guess {
     }
 
     public static Guess returnRandom() {
-        if (new Random().nextInt(10) > 5) {
+        if (ThreadLocalRandom.current().nextInt(10) > 5) {
             return Guess.EVEN;
         }
         return Guess.ODD;

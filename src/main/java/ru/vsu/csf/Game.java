@@ -3,9 +3,7 @@ package ru.vsu.csf;
 import ru.vsu.csf.stats.GameStats;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

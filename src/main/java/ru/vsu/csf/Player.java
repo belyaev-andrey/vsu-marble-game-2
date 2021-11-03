@@ -3,7 +3,7 @@ package ru.vsu.csf;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
 
@@ -41,7 +41,7 @@ public class Player {
     }
 
     public void makeBet() {
-        int r = new Random().nextInt(ballList.size()+1);
+        int r = ThreadLocalRandom.current().nextInt(ballList.size()+1);
         for (int i = 0; (i < r && i < ballList.size()); i++) {
             betList.add(ballList.remove(0));
         }
