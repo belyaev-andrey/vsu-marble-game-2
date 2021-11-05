@@ -1,4 +1,4 @@
-package ru.vsu.csf;
+package ru.vsu.csf.model;
 
 import java.awt.*;
 

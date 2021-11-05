@@ -1,4 +1,4 @@
-package ru.vsu.csf;
+package ru.vsu.csf.model;
 
 import ru.vsu.csf.stats.GameStats;
 
@@ -43,8 +43,6 @@ public class Game {
 
     public List<GameStats> getStatistics() {
         return Arrays.stream(players)
-                .map(player -> {
-                    return new GameStats(player.name, player.getBallsCount());
-                }).collect(Collectors.toList());
+                .map(player -> new GameStats(player.name, player.getBallsCount())).collect(Collectors.toList());
     }
 }

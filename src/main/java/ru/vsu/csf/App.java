@@ -1,5 +1,6 @@
 package ru.vsu.csf;
 
+import ru.vsu.csf.model.Game;
 import ru.vsu.csf.stats.GameStats;
 
 import java.util.List;
