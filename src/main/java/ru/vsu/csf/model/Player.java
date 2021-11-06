@@ -1,9 +1,10 @@
 package ru.vsu.csf.model;
 
+import ru.vsu.csf.model.strategy.BetStrategy;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Player {
 
@@ -11,12 +12,15 @@ public class Player {
 
     public final String name;
 
+    private final BetStrategy betStrategy;
+
     private final List<Ball> ballList;
 
     private final List<Ball> betList;
 
-    public Player(String name, Color color) {
+    public Player(String name, Color color, BetStrategy betStrategy) {
         this.name = name;
+        this.betStrategy = betStrategy;
         ballList = new ArrayList<>(INITIAL_BALLS_COUNT);
         betList = new ArrayList<>(INITIAL_BALLS_COUNT);
         for (int i = 0; i < INITIAL_BALLS_COUNT; i++) {
@@ -41,7 +45,7 @@ public class Player {
     }
 
     public void makeBet() {
-        int r = ThreadLocalRandom.current().nextInt(ballList.size()+1);
+        int r = betStrategy.getNext(ballList.size());
         for (int i = 0; (i < r && i < ballList.size()); i++) {
             betList.add(ballList.remove(0));
         }

@@ -1,5 +1,8 @@
 package ru.vsu.csf.model;
 
+import ru.vsu.csf.GameUi;
+import ru.vsu.csf.model.strategy.ManualInputStrategy;
+import ru.vsu.csf.model.strategy.RandomStrategy;
 import ru.vsu.csf.stats.GameStats;
 
 import java.awt.*;
@@ -13,9 +16,9 @@ public class Game {
 
     int currentPlayer = 0;
 
-    public Game(String p1, String p2) {
-        players[0] = new Player(p1, Color.BLACK);
-        players[1] = new Player(p2, Color.BLUE);
+    public Game(String p1, String p2, GameUi gameUi) {
+        players[0] = new Player(p1, Color.BLACK, new RandomStrategy(p1));
+        players[1] = new Player(p2, Color.BLUE, new ManualInputStrategy(p2, gameUi));
     }
 
     public void makeStep() {

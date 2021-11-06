@@ -7,14 +7,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import ru.vsu.csf.GameUi;
 import ru.vsu.csf.model.Game;
 import ru.vsu.csf.stats.GameStats;
 
+import java.text.MessageFormat;
 import java.util.List;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class GameController {
+public class GameController implements GameUi {
 
     @FXML Label player1Name;
     @FXML Label player2Name;
@@ -23,25 +26,33 @@ public class GameController {
     @FXML HBox player2Balls;
 
     private Game game;
-    private Timer t;
 
     public void startGame(String player1, String player2) {
         player1Name.setText(player1);
         player2Name.setText(player2);
-        game = new Game(player1, player2);
+        game = new Game(player1, player2, this);
         updateStatistics();
-        t = new Timer();
-        t.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> doNextStep());
-            }
-        }, 100L, 100L);
+    }
+
+    @Override
+    public int getBet(String player, int ballsCount) {
+
+        TextInputDialog dialog = new TextInputDialog(Integer.toString(ballsCount));
+        dialog.setTitle("Your bet?");
+        dialog.setContentText(player + "- your bet: ");
+
+        Optional<String> result = dialog.showAndWait();
+
+        Integer i = result.map(Integer::parseInt).orElseThrow();
+
+        return i;
     }
 
     public void doNextStep() {
-        game.makeStep();
-        updateStatistics();
+        if (!game.gameOver()) {
+            game.makeStep();
+            updateStatistics();
+        }
 
         if (game.gameOver()) {
             nextStep.setDisable(true);
@@ -50,7 +61,6 @@ public class GameController {
             dialog.setContentText("Game Over");
             dialog.getDialogPane().getButtonTypes().add(ok);
             dialog.show();
-            t.cancel();
         }
     }
 

@@ -28,7 +28,7 @@ public class StartController {
         GameController gameController = nextSceneLoader.getController();
 
         gameController.startGame(player1Name.getText(), player2Name.getText());
-        Scene gameScene = new Scene(gameUi, 600, 200);
+        Scene gameScene = new Scene(gameUi, 450, 250);
 
         stage.setScene(gameScene);
         stage.show();

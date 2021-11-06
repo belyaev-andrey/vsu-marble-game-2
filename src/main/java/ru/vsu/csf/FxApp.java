@@ -23,7 +23,7 @@ public class FxApp extends Application {
         FXMLLoader startLoader = new FXMLLoader(getClass().getResource("ui/StartController.fxml"));
         Parent startUi = startLoader.load();
 
-        Scene startScene = new Scene(startUi, 300, 100);
+        Scene startScene = new Scene(startUi, 300, 150);
 
         FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("ui/GameController.fxml"));
 
