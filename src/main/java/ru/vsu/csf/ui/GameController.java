@@ -1,21 +1,16 @@
 package ru.vsu.csf.ui;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import ru.vsu.csf.GameUi;
 import ru.vsu.csf.model.Game;
 import ru.vsu.csf.stats.GameStats;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class GameController implements GameUi {
 

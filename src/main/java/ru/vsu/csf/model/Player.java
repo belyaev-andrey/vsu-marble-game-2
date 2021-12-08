@@ -59,6 +59,13 @@ public class Player {
         return Guess.returnRandom();
     }
 
+    public void finishGame() {
+        if (ballList.size() > 0 && ballList.size() < INITIAL_BALLS_COUNT*2) {
+            throw new IllegalStateException("Cannot finish game, balls count: "+ballList.size());
+        }
+        betStrategy.endGame();
+    }
+
     @Override
     public String toString() {
         return "Player{" +

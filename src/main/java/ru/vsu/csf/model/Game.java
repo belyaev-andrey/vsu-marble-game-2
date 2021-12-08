@@ -1,6 +1,7 @@
 package ru.vsu.csf.model;
 
 import ru.vsu.csf.GameUi;
+import ru.vsu.csf.model.strategy.BetStrategy;
 import ru.vsu.csf.model.strategy.ManualInputStrategy;
 import ru.vsu.csf.model.strategy.RandomStrategy;
 import ru.vsu.csf.stats.GameStats;
@@ -15,6 +16,12 @@ public class Game {
     private final Player[] players = new Player[2];
 
     int currentPlayer = 0;
+
+    public Game(Player p1, Player p2) {
+        players[0] = p1;
+        players[1] = p2;
+    }
+
 
     public Game(String p1, String p2, GameUi gameUi) {
         players[0] = new Player(p1, Color.BLACK, new RandomStrategy(p1));
@@ -41,7 +48,13 @@ public class Game {
     }
 
     public boolean gameOver() {
-        return players[0].getBallsCount() == 0 || players[1].getBallsCount() == 0;
+        boolean isOver = players[0].getBallsCount() == 0 || players[1].getBallsCount() == 0;
+        if (isOver) {
+            for (Player player : players) {
+                player.finishGame();
+            }
+        }
+        return isOver;
     }
 
     public List<GameStats> getStatistics() {
