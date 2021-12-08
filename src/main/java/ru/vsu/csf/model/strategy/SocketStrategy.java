@@ -29,13 +29,18 @@ public class SocketStrategy implements BetStrategy {
         String answer = "";
         try {
             String command = Command.BET.getCommandString()+Command.SEPARATOR+value;
-            System.out.println("To client:"+command);
+            System.out.println("To client: "+command);
             out.println(command);
             while ((answer = in.readLine()) == null) {
             }
-            String[] commandSplit = answer.split(Command.SEPARATOR);
-            System.out.println("Player's bet: " + commandSplit[1]);
-            return Integer.parseInt(commandSplit[1]);
+            System.out.println("From client: "+answer);
+            String[] answerParsed = answer.split(Command.SEPARATOR);
+            if (Command.RESP.getCommandString().equals(answerParsed[0])) {
+                System.out.println("Player's bet: " + answerParsed[1]);
+            } else {
+                throw new IllegalArgumentException("Client response is not recognized: "+answer);
+            }
+            return Integer.parseInt(answerParsed[1]);
         } catch (IOException ex) {
             throw new IllegalStateException("Cannot communicate with a client", ex);
         }

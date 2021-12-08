@@ -3,6 +3,7 @@ package ru.vsu.csf.model;
 public enum Command {
     GAME("GAME"),
     BET("BET"),
+    RESP("RESP"),
     END("END");
 
     public static final String SEPARATOR = ":";

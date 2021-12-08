@@ -41,7 +41,7 @@ public class AppClient {
             if (Command.BET.getCommandString().equals(parsed[0])) {
                 System.out.print("Enter your bet (up to "+parsed[1]+"): ");
                 int nextInt = new Scanner(System.in).nextInt();
-                String resp = "RESP:" + nextInt;
+                String resp = Command.RESP.getCommandString()+ Command.SEPARATOR + nextInt;
                 System.out.println("To server:"+resp);
                 out.println(resp);
             }
