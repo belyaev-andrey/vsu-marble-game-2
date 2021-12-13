@@ -8,11 +8,13 @@ import java.net.Socket;
 
 public class AppServer {
 
+    public static final int DEFAULT_PORT = 9999;
+
     private final ServerSocket serverSocket;
 
     public static void main(String[] args) {
         try {
-            int port = Integer.parseInt(args[0]);
+            int port = args.length > 0 ? Integer.parseInt(args[0]) : DEFAULT_PORT;
             AppServer server = new AppServer(port);
             server.start();
         } catch (IOException e) {
@@ -25,7 +27,7 @@ public class AppServer {
     }
 
     public void start() throws IOException {
-        System.out.println("Game server started");
+        System.out.println("Game server started on port: "+serverSocket.getLocalPort());
         while (true) {
             Socket clientSocket = serverSocket.accept();
             System.out.println("Client connected from: "+clientSocket.getInetAddress());
